@@ -7,14 +7,24 @@
     <button class="navbar-toggler sidebar-toggler d-md-down-none mr-auto" type="button" @click="sidebarToggle">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" @click="asideToggle">
+   
+    <b-navbar-nav class="ml-auto">
+      <HeaderDropdown/>
+    </b-navbar-nav>
+    <!-- <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" @click="asideToggle">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
   </header>
 </template>
+
 <script>
+import HeaderDropdown from './HeaderDropdown.vue'
+
 export default {
   name: 'header',
+  components: {
+    HeaderDropdown
+  },
   methods: {
     sidebarToggle (e) {
       e.preventDefault()

@@ -1,0 +1,10 @@
+{
+    "i18n": {
+        "dashboard": "Main dashboard",
+        "lang": "Language",
+        "profile": "Profile",
+        "login": "Login",
+        "logout": "Logout",
+        "user": "User"
+    }
+}
