@@ -10,15 +10,15 @@
                 <p class="text-muted">Sign In to your account</p>
                 <div class="input-group mb-3">
                   <span class="input-group-addon"><i class="icon-user"></i></span>
-                  <input type="text" class="form-control" placeholder="Username">
+                  <input type="input" class="form-control" placeholder="Email" v-model="email">
                 </div>
                 <div class="input-group mb-4">
                   <span class="input-group-addon"><i class="icon-lock"></i></span>
-                  <input type="password" class="form-control" placeholder="Password">
+                  <input type="password" class="form-control" placeholder="Password" v-model="pass">
                 </div>
                 <b-row>
                   <b-col cols="6">
-                    <b-button variant="primary" class="px-4">Login</b-button>
+                    <b-button variant="primary" class="px-4" @click="login()">Login</b-button>
                   </b-col>
                   <b-col cols="6" class="text-right">
                     <b-button variant="link" class="px-0">Forgot password?</b-button>
@@ -43,7 +43,20 @@
 </template>
 
 <script>
+import { login } from '../../utils/auth'
+
 export default {
-  name: 'Login'
+  name: 'Login',
+  data () {
+    return {
+      email: '',
+      pass: ''
+    }
+  },
+  methods: {
+    handleLogin () {
+      login(this.email, this.pass)
+    }
+  }
 }
 </script>

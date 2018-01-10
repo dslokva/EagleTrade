@@ -8,6 +8,7 @@ import Full from '@/containers/Full'
 import Dashboard from '@/views/Dashboard'
 import Login from '@/views/pages/Login'
 import Page404 from '@/views/pages/Page404'
+import Callback from '@/utils/Callback'
 
 Vue.use(Router)
 
@@ -28,6 +29,10 @@ export default new Router({
           component: Dashboard
         }
       ]
+    },
+    {
+      path: '/callback',
+      component: Callback
     },
     {
       path: '/pages',
