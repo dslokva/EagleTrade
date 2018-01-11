@@ -3,6 +3,7 @@ import decode from 'jwt-decode'
 import Auth0 from 'auth0-js'
 import router from '../router'
 import EventEmitter from 'eventemitter3'
+import store from './store'
 
 const ID_TOKEN_KEY = 'id_token'
 const ACCESS_TOKEN_KEY = 'access_token'
@@ -48,6 +49,7 @@ export function logout () {
 
 export function requireAuth (to, from, next) {
   if (!isLoggedIn()) {
+    store.commit('clearUserProfile')
     next({
       path: '/pages/login',
       query: { redirect: to.fullPath }
@@ -57,13 +59,13 @@ export function requireAuth (to, from, next) {
   }
 }
 
-export function handleAuthentication (storage) {
+export function handleAuthentication () {
   setAccessToken()
   setIdToken()
   auth.parseHash((err, authResult) => {
     if (authResult && authResult.accessToken && authResult.idToken) {
       auth.client.userInfo(authResult.accessToken, function (err, user) {
-        storage.commit('setUserProfile', JSON.stringify(user))
+        store.commit('setUserProfile', JSON.stringify(user))
         console.log(user)
         console.log(err)
       })

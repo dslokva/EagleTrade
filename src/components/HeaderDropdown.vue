@@ -27,6 +27,7 @@ export default {
   },
   methods: {
     handleLogout () {
+      this.$store.commit('clearUserProfile')
       logout()
     },
     isLoggedIn () {

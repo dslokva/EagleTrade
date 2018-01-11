@@ -89,7 +89,7 @@ export default {
       if (this.loginClicked) {
         if (this.authError) { return false }
         const mailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        if (this.email.length < 7 || !mailRegex.test(this.email)) {
+        if (!mailRegex.test(this.email)) {
           this.authEmailFieldTextError = 'Please enter a vaild email'
           return false
         } else return true

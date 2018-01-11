@@ -11,18 +11,13 @@ const vuexLocal = new VuexPersistence({
 const state = {
   userdata: {
     profile: ''
-  },
-  authenticated: false
+  }
 }
 
 const mutations = {
   setUserProfile (state, newValue) {
     state.userdata.profile = newValue
     console.log('user changed - ' + JSON.parse(state.userdata.profile).nickname)
-  },
-  setAuthenticated (state, newValue) {
-    state.authenticated = newValue
-    console.log('auth state changed - ' + state.authenticated)
   },
   clearUserProfile (state) {
     state.userdata.profile = ''
@@ -32,7 +27,6 @@ const mutations = {
 }
 
 const getters = {
-  isAuthenticated: state => state.authenticated,
   userName: state => JSON.parse(state.userdata.profile).nickname
 }
 

@@ -16,7 +16,7 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      handleAuthentication(this.$store)
+      handleAuthentication()
       navigateToMainPage()
     })
   }
