@@ -1,11 +1,11 @@
 <template>
   <div class="animated fadeIn">
-    <p class="text-info">Dashboard</p>
+    <p class="text-info">User settings</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Dashboard'
+  name: 'UserSettings'
 }
 </script>

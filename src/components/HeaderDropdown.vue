@@ -7,13 +7,13 @@
           </b-nav-item>
         </template>
         <b-dropdown-header tag="div" class="text-center"><strong>Account</strong></b-dropdown-header>        
-        <div v-if="isAuthenticated">
-          <b-dropdown-item><i class="fa fa-user"></i> Profile</b-dropdown-item>
-          <b-dropdown-item><i class="fa fa-wrench"></i> Settings</b-dropdown-item>
+        <div v-if="isLoggedIn()">
+          <b-dropdown-item :to="'userprofile'"><i class="fa fa-user"></i> Profile</b-dropdown-item>
+          <b-dropdown-item :to="'usersettings'"><i class="fa fa-wrench"></i> Settings</b-dropdown-item>
           <b-dropdown-item @click="handleLogout()"><i class="fa fa-lock"></i> Logout</b-dropdown-item>
         </div>
-        <div v-if="!isAuthenticated">
-          <b-dropdown-item v-bind:to="'/pages/login'"><i class="fa fa-lock"></i> Login</b-dropdown-item>
+        <div v-if="!isLoggedIn()">
+          <b-dropdown-item :to="'/pages/login'"><i class="fa fa-lock"></i> Login</b-dropdown-item>
         </div>
       </b-nav-item-dropdown>
 </template>
@@ -28,9 +28,8 @@ export default {
   methods: {
     handleLogout () {
       logout()
-      this.$router.go('/pages/login')
     },
-    isAuthenticated () {
+    isLoggedIn () {
       return isLoggedIn()
     }
   }

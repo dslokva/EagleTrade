@@ -1,7 +1,8 @@
 /* eslint no-undef: "off" */
 import decode from 'jwt-decode'
 import Auth0 from 'auth0-js'
-import Router from 'vue-router'
+import router from '../router'
+import EventEmitter from 'eventemitter3'
 
 const ID_TOKEN_KEY = 'id_token'
 const ACCESS_TOKEN_KEY = 'access_token'
@@ -11,48 +12,72 @@ const REDIRECT = window.location.origin + '/callback'
 const SCOPE = 'openid profile'
 const AUDIENCE = 'http://eagletrade.com'
 
-/* eslint no-undef: "off" */
-const auth = new Auth0({
+const auth = new Auth0.WebAuth({
   domain: CLIENT_DOMAIN,
   clientID: CLIENT_ID,
-  responseType: 'token',
-  callbackURL: window.location.origin + '/'
+  callbackURL: REDIRECT,
+  audience: AUDIENCE,
+  scope: SCOPE,
+  redirectUri: REDIRECT,
+  responseType: 'token id_token'
 })
+
+export var authNotifier = new EventEmitter()
 
 export function login (username, password) {
   auth.login({
     connection: 'Username-Password-Authentication',
-    responseType: 'token id_token',
-    email: username,
-    password: password,
-    redirectUri: REDIRECT,
-    audience: AUDIENCE,
-    scope: SCOPE
+    username: username,
+    password: password
   },
   function (err) {
-    if (err) alert('something went wrong: ' + err.message)
+    if (err) {
+      authNotifier.emit('authError', {
+        errorMessage: err.error,
+        errorDescription: err.error_description
+      })
+    }
   })
 }
-
-var router = new Router({
-  mode: 'history'
-})
-
 export function logout () {
   clearIdToken()
   clearAccessToken()
-  router.go('/')
+  clearSSOData()
+  router.replace('/pages/login')
 }
 
 export function requireAuth (to, from, next) {
   if (!isLoggedIn()) {
     next({
-      path: '/',
+      path: '/pages/login',
       query: { redirect: to.fullPath }
     })
   } else {
     next()
   }
+}
+
+export function handleAuthentication (storage) {
+  setAccessToken()
+  setIdToken()
+  auth.parseHash((err, authResult) => {
+    if (authResult && authResult.accessToken && authResult.idToken) {
+      auth.client.userInfo(authResult.accessToken, function (err, user) {
+        storage.commit('setUserProfile', JSON.stringify(user))
+        console.log(user)
+        console.log(err)
+      })
+      router.replace('/dashboard')
+    } else if (err) {
+      router.replace('/pages/login')
+      console.log(err)
+      alert(`Error: ${err.error}. Check the console for further details.`)
+    }
+  })
+}
+
+export function navigateToMainPage () {
+  router.replace('dashboard')
 }
 
 export function getIdToken () {
@@ -65,6 +90,10 @@ export function getAccessToken () {
 
 function clearIdToken () {
   localStorage.removeItem(ID_TOKEN_KEY)
+}
+
+function clearSSOData () {
+  localStorage.removeItem('auth0.ssodata')
 }
 
 function clearAccessToken () {

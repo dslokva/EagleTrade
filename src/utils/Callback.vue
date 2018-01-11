@@ -1,19 +1,23 @@
 <template>
   <div>
-    <icon name="spinner" spin/>
+    <i class="fa fa-spinner fa-lg fa-spin"></i>
   </div>
 </template>
 
 <script>
-import { setIdToken, setAccessToken } from '../utils/auth'
+import { navigateToMainPage, handleAuthentication } from '../utils/auth'
 
 export default {
-  name: '',
+  name: 'Callback',
+  data () {
+    return {
+
+    }
+  },
   mounted () {
     this.$nextTick(() => {
-      setAccessToken()
-      setIdToken()
-      window.location.href = '/'
+      handleAuthentication(this.$store)
+      navigateToMainPage()
     })
   }
 }

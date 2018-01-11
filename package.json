@@ -23,6 +23,7 @@
     "bootstrap": "4.0.0-beta.2",
     "bootstrap-vue": "1.1.0",
     "chart.js": "2.7.1",
+    "email-existence": "^0.1.5",
     "font-awesome": "^4.7.0",
     "jwt-decode": "^2.2.0",
     "simple-line-icons": "^2.4.1",
