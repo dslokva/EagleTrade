@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <i class="fa fa-spinner fa-lg fa-spin"></i>
-  </div>
+  <b-row class="justify-content-center">
+    <div>
+      <i class="fa fa-spinner fa-lg fa-spin"></i>
+    </div>
+  </b-row>
 </template>
 
 <script>

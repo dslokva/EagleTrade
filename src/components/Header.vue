@@ -7,10 +7,18 @@
     <button class="navbar-toggler sidebar-toggler d-md-down-none mr-auto" type="button" @click="sidebarToggle">
       <span class="navbar-toggler-icon"></span>
     </button>
-   
     <b-navbar-nav class="ml-auto">
       <HeaderDropdown/>
-    </b-navbar-nav>
+      <b-nav-item-dropdown right no-caret>
+         <template slot="button-content">
+            <b-nav-item class="px-3">
+            <i class="fa fa-language fa-lg"></i>
+          </b-nav-item>
+          </template>
+        <b-dropdown-item v-on:click="locale = 'en'">English</b-dropdown-item>
+        <b-dropdown-item v-on:click="locale = 'ru'">Русский</b-dropdown-item>
+      </b-nav-item-dropdown>
+   </b-navbar-nav>
     <!-- <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" @click="asideToggle">
       <span class="navbar-toggler-icon"></span>
     </button> -->
@@ -22,8 +30,18 @@ import HeaderDropdown from './HeaderDropdown.vue'
 
 export default {
   name: 'header',
+  data () {
+    return {
+      locale: this.$i18n.locale
+    }
+  },
   components: {
     HeaderDropdown
+  },
+  watch: {
+    locale (val) {
+      this.$i18n.locale = val
+    }
   },
   methods: {
     sidebarToggle (e) {

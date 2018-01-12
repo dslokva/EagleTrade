@@ -6,8 +6,8 @@ import Full from '@/containers/Full'
 
 // Views
 import Dashboard from '@/views/Dashboard'
-import UserSettings from '@/views/UserSettings'
-import UserProfile from '@/views/UserProfile'
+import UserSettings from '@/views/parts/UserSettings'
+import UserProfile from '@/views/parts/UserProfile'
 
 // Full pages
 import Login from '@/views/pages/Login'
@@ -28,24 +28,24 @@ export default new Router({
     {
       path: '/',
       redirect: '/dashboard',
-      name: 'Home',
+      name: 'home',
       component: Full,
       children: [
         {
           path: '/dashboard',
-          name: 'Dashboard',
+          name: 'dashboard',
           component: Dashboard
         },
         {
           path: '/usersettings',
-          name: 'User Settings',
+          name: 'user_settings',
           beforeEnter: requireAuth,
           component: UserSettings
 
         },
         {
           path: '/userprofile',
-          name: 'User Profile',
+          name: 'user_profile',
           beforeEnter: requireAuth,
           component: UserProfile
         }
@@ -71,7 +71,7 @@ export default new Router({
         },
         {
           path: 'login',
-          name: 'Login',
+          name: 'login',
           component: Login
         }
       ]

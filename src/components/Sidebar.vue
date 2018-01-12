@@ -7,7 +7,7 @@
       <ul class="nav">
         <template v-for="(item, index) in navItems">
           <template v-if="item.title">
-            <SidebarNavTitle :name="item.name" :classes="item.class" :wrapper="item.wrapper"/>
+            <SidebarNavTitle :name="i18nname(item.name)" :classes="item.class" :wrapper="item.wrapper"/>
           </template>
           <template v-else-if="item.divider">
             <SidebarNavDivider :classes="item.class"/>
@@ -15,7 +15,7 @@
           <template v-else>
             <template v-if="item.children">
               <!-- First level dropdown -->
-              <SidebarNavDropdown :name="item.name" :url="item.url" :icon="item.icon">
+              <SidebarNavDropdown :name="i18nname(item.name)" :url="item.url" :icon="item.icon">
                 <template v-for="(childL1, index) in item.children">
                   <template v-if="childL1.children">
                     <!-- Second level dropdown -->
@@ -35,7 +35,7 @@
             </template>
             <template v-else>
               <SidebarNavItem :classes="item.class">
-                <SidebarNavLink :name="item.name" :url="item.url" :icon="item.icon" :badge="item.badge" :variant="item.variant"/>
+                <SidebarNavLink :name="i18nname(item.name)" :url="item.url" :icon="item.icon" :badge="item.badge" :variant="item.variant"/>
               </SidebarNavItem>
             </template>
           </template>
@@ -81,6 +81,9 @@ export default {
     handleClick (e) {
       e.preventDefault()
       e.target.parentElement.classList.toggle('open')
+    },
+    i18nname (itemName) {
+      return this.$i18n.t('i18n.' + itemName)
     }
   }
 }

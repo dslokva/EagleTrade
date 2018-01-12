@@ -3,8 +3,14 @@
         "dashboard": "Main dashboard",
         "lang": "Language",
         "profile": "Profile",
+        "settings": "Settings",
         "login": "Login",
         "logout": "Logout",
-        "user": "User"
+        "user": "User",
+        "account": "Account",
+        "home": "Home",
+        "user_settings": "User settings",
+        "user_profile": "User profile",
+        "maintable_title": "Coin markets delta monitoring"
     }
 }
