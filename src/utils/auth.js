@@ -44,6 +44,7 @@ export function logout () {
   clearIdToken()
   clearAccessToken()
   clearSSOData()
+  store.commit('clearUserProfile')
   router.replace('/pages/login')
 }
 

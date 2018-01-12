@@ -7,26 +7,26 @@
             <b-card no-body class="p-4">
               <b-card-body>
                 <div>
-                <h1>Login</h1>
-                <p class="text-muted">Sign In to your account</p>
+                <h1>{{ $t('i18n.login') }}</h1>
+                <p class="text-muted">{{ $t('i18n.signin_form') }}</p>
                 </div>
                   <b-form-group :state="emailCheck" :feedback="authEmailFieldTextError">
                     <b-input-group left="<i class='icon-user'></i>">
-                      <b-form-input type="email" class="form-control" :state="emailCheck" placeholder="Email" v-model.trim="email"/>
+                      <b-form-input type="email" class="form-control" :state="emailCheck" :placeholder="$t('i18n.email')" v-model.trim="email"/>
                     </b-input-group>
                   </b-form-group>
 
                   <b-form-group :state="passCheck" :feedback="authPassFieldTextError">
                       <b-input-group left="<i class='icon-lock'></i>">
-                        <b-form-input type="password" class="form-control" :state="passCheck" placeholder="Password" v-model.trim="pass"/>
+                        <b-form-input type="password" class="form-control" :state="passCheck" :placeholder="$t('i18n.password')" v-model.trim="pass"/>
                       </b-input-group>       
                   </b-form-group>
                 <b-row>
                   <b-col cols="6">
-                    <b-button type="submit" variant="primary" class="px-4" @click="handleLogin()">Login</b-button>
+                    <b-button type="submit" variant="primary" class="px-4" @click="handleLogin()">{{ $t('i18n.login_form') }}</b-button>
                   </b-col>
                   <b-col cols="6" class="text-right">
-                    <b-button variant="link" class="px-0">Forgot password?</b-button>
+                    <b-button variant="link" class="px-0">{{ $t('i18n.forgot_password') }}</b-button>
                   </b-col>
                 </b-row>
               </b-card-body>
@@ -82,6 +82,9 @@ export default {
     },
     pass: function (newPass) {
       this.authError = false
+    },
+    i18nname (itemName) {
+      return this.$i18n.t('i18n.' + itemName)
     }
   },
   computed: {

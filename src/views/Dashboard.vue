@@ -1,7 +1,7 @@
 <template>
   <div class="animated fadeIn">
     <b-row>
-      <b-col lg="10">
+      <b-col lg="12">
         <mainTable hover></mainTable>
       </b-col>
     </b-row>

@@ -5,12 +5,17 @@
         "profile": "Profile",
         "settings": "Settings",
         "login": "Login",
+        "login_form": "Login",
         "logout": "Logout",
         "user": "User",
         "account": "Account",
         "home": "Home",
         "user_settings": "User settings",
         "user_profile": "User profile",
-        "maintable_title": "Coin markets delta monitoring"
+        "maintable_title": "Coin markets delta monitoring",
+        "signin_form": "Sign In to your account",
+        "email": "Email",
+        "password": "Password",
+        "forgot_password": "Forgot password?"
     }
 }

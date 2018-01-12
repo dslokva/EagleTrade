@@ -25,12 +25,9 @@ export default {
         item = item.meta && item.meta.label
       }
       if (item.name) {
-        item = this.i18nname(item.name)
+        item = this.$i18n.t('i18n.' + item.name)
       }
       return item
-    },
-    i18nname (itemName) {
-      return this.$i18n.t('i18n.' + itemName)
     }
   }
 }
