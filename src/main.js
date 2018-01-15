@@ -6,7 +6,15 @@ import App from './App'
 import router from './router'
 import i18n from './i18n'
 import mainStore from './utils/store'
+import VueNativeSock from 'vue-native-websocket'
 
+Vue.use(VueNativeSock, 'ws://192.168.0.118:9090/ws', {
+  reconnection: true,
+  reconnectionAttempts: 5,
+  reconnectionDelay: 3000,
+  store: mainStore
+  // format: 'json'
+})
 Vue.use(BootstrapVue)
 
 /* eslint-disable no-new */

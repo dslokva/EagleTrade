@@ -9,6 +9,9 @@
     <section v-if="authRequired()">
       <p>Authenticated user content</p>
     </section>
+
+    <b-button variant="primary" @click="login()"><i class="fa fa-refresh"></i>&nbsp; Refresh info</b-button>
+    <b-button variant="primary" @click="echo()"><i class="fa fa-refresh"></i>&nbsp; Echo</b-button>
   </div>
 </template>
 
@@ -19,8 +22,7 @@ import { isLoggedIn } from '../utils/auth'
 export default {
   name: 'Dashboard',
   data () {
-    return {
-    }
+    return {}
   },
   components: {
     mainTable
@@ -28,6 +30,16 @@ export default {
   methods: {
     authRequired: function () {
       return isLoggedIn()
+    },
+    login () {
+      this.$socket.send(
+        JSON.stringify({ messageType: 'LOGIN', message: 'Name111' })
+      )
+    },
+    echo () {
+      this.$socket.send(
+        JSON.stringify({ messageType: 'MESSAGE', message: 'Message111' })
+      )
     }
   }
 }
