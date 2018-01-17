@@ -38,7 +38,7 @@ export default {
   name: 'header',
   data () {
     return {
-      locale: this.$i18n.locale
+      locale: this.$store.getters.currentLocale
     }
   },
   components: {
@@ -47,6 +47,7 @@ export default {
   watch: {
     locale (val) {
       this.$i18n.locale = val
+      this.$store.commit('setCurrentLocale', val)
     }
   },
   methods: {

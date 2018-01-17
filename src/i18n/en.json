@@ -4,8 +4,12 @@
         "lang": "Language",
         "profile": "Profile",
         "settings": "Settings",
+        "register_now": "Register Now!",
+        "register": "Register",
         "login": "Login",
         "login_form": "Login",
+        "signin_form": "Sign In to your account",
+        "signup_form": "Sign up",
         "logout": "Logout",
         "user": "User",
         "account": "Account",
@@ -13,9 +17,10 @@
         "user_settings": "User settings",
         "user_profile": "User profile",
         "maintable_title": "Coin markets delta monitoring",
-        "signin_form": "Sign In to your account",
         "email": "Email",
         "password": "Password",
-        "forgot_password": "Forgot password?"
+        "forgot_password": "Forgot password?",
+        "enter_api_key": "Please enter your API key",
+        "enter_api_secret": "Please enter your API secret"
     }
 }

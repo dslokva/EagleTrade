@@ -10,8 +10,14 @@ const vuexLocal = new VuexPersistence({
 
 const state = {
   userdata: {
-    profile: ''
+    profile: '',
+    wexApiKey: '',
+    wexApiSecret: '',
+    wexApiEnabled: ''
   },
+
+  currentLocale: 'en',
+
   socket: {
     isConnected: false,
     message: '',
@@ -45,6 +51,18 @@ const mutations = {
     state.userdata.profile = newValue
     console.log('user changed - ' + JSON.parse(state.userdata.profile).nickname)
   },
+  setCurrentLocale (state, newValue) {
+    state.currentLocale = newValue
+  },
+  setWexAPIKey (state, newValue) {
+    state.userdata.wexApiKey = newValue
+  },
+  setWexAPISecret (state, newValue) {
+    state.userdata.wexApiSecret = newValue
+  },
+  setWexAPIEnabled (state, newValue) {
+    state.userdata.wexApiEnabled = newValue
+  },
   clearUserProfile (state) {
     state.userdata.profile = ''
     state.authenticated = false
@@ -53,7 +71,11 @@ const mutations = {
 }
 
 const getters = {
-  userName: state => JSON.parse(state.userdata.profile).nickname
+  userName: state => JSON.parse(state.userdata.profile).nickname,
+  wexAPIEnabled: state => state.userdata.wexApiEnabled,
+  wexApiKey: state => state.userdata.wexApiKey,
+  wexApiSecret: state => state.userdata.wexApiSecret,
+  currentLocale: state => state.currentLocale
 }
 
 export default new Vuex.Store({

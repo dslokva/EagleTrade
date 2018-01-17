@@ -11,6 +11,7 @@ import UserProfile from '@/views/parts/UserProfile'
 
 // Full pages
 import Login from '@/views/pages/Login'
+import Register from '@/views/pages/Register'
 import Page404 from '@/views/pages/Page404'
 import Callback from '@/utils/Callback'
 
@@ -73,6 +74,11 @@ export default new Router({
           path: 'login',
           name: 'login',
           component: Login
+        },
+        {
+          path: 'register',
+          name: 'register',
+          component: Register
         }
       ]
     },

@@ -1,10 +1,14 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
+import mainStore from '../utils/store'
 
 Vue.use(VueI18n)
 
+var storedLocale = mainStore.getters.currentLocale
+if (!storedLocale) storedLocale = 'en'
+
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: storedLocale,
   messages: {
     'en': require('./en.json'),
     'ru': require('./ru.json')

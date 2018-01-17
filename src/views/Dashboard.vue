@@ -10,7 +10,7 @@
       <p>Authenticated user content</p>
     </section>
 
-    <b-button variant="primary" @click="login()"><i class="fa fa-refresh"></i>&nbsp; Refresh info</b-button>
+    <b-button variant="primary" @click="register()"><i class="fa fa-refresh"></i>&nbsp; Register</b-button>
     <b-button variant="primary" @click="echo()"><i class="fa fa-refresh"></i>&nbsp; Echo</b-button>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
     authRequired: function () {
       return isLoggedIn()
     },
-    login () {
+    register () {
       this.$socket.send(
         JSON.stringify({ messageType: 'LOGIN', message: 'Name111' })
       )

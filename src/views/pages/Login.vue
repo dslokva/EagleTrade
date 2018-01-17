@@ -34,9 +34,9 @@
             <b-card no-body class="text-white bg-primary py-5 d-md-down-none" style="width:44%">
               <b-card-body class="text-center">
                 <div>
-                  <h2>Sign up</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                  <b-button variant="primary" class="active mt-3">Register Now!</b-button>
+                  <h2>{{ $t('i18n.signup_form') }}</h2>
+                  <p>Access to full functional requires free registration. There is an few easy steps.</p>
+                  <b-button :to="'/pages/register'" variant="primary" class="active mt-3">{{ $t('i18n.register_now') }}</b-button>
                 </div>
               </b-card-body>
             </b-card>
