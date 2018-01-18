@@ -15,7 +15,6 @@
             <i class="fa fa-id-card-o"></i> Your API settings for cryptomarkets
           </div>
       <b-row>
-        
         <b-col sm="6" md="4">
         <b-card>
           <div slot="header">
@@ -28,28 +27,31 @@
           </div>
         <!-- <b-col sm="5"> -->
           <small class="text-muted text-uppercase font-weight-bold">WEX.nz API key</small>
-           <b-form-fieldset 
+           <b-form-group 
+            :state="checkWexKey" 
+            :feedback="authKeyFieldTextError"
             :disabled="!isAPIEnabled"
-            :label-cols="3" 
-            :description="$t('i18n.enter_api_key')">
-              <b-form-input type="text" v-model.trim="wexApiKey"></b-form-input>
-          </b-form-fieldset>
-
+            :label-cols="3">
+              <b-form-input :state="checkWexKey" type="text" v-model.trim="wexApiKey"></b-form-input>
+          </b-form-group>
+          <!-- :description="$t('i18n.enter_api_key')" -->
           <small class="text-muted text-uppercase font-weight-bold">WEX.nz API secret</small>
            <b-form-fieldset 
+            :state="checkWexSecret" 
+            :feedback="authSecretFieldTextError"
             :disabled="!isAPIEnabled"
-            :label-cols="3" 
-            :description="$t('i18n.enter_api_secret')">
-              <b-form-input type="password" v-model.trim="wexApiSecret"></b-form-input>
+            :label-cols="3">
+              <b-form-input :state="checkWexSecret" type="password" v-model.trim="wexApiSecret"></b-form-input>
           </b-form-fieldset>
+          <!-- :description="$t('i18n.enter_api_secret')" -->
         <!-- </b-col> -->
                 </b-card>
         </b-col>
       </b-row>
          
         <div slot="footer">
-          <b-button type="submit" @click="storeWexApiKeys" variant="success">Save changes</b-button>
-          <b-button :to="'/dashboard'" type="button" variant="secondary">Back</b-button>
+          <b-button type="submit" @click="checkAndSaveAPIKeys" variant="success">{{ $t('i18n.save_changes_form') }}</b-button>
+          <b-button :to="'/dashboard'" type="button" variant="secondary">{{ $t('i18n.back_form') }}</b-button>
         </div>
 </b-card>
   </div>
@@ -65,27 +67,57 @@ export default {
       wexApiKey: this.$store.getters.wexApiKey,
       wexApiSecret: this.$store.getters.wexApiSecret,
       dismissSecs: 3,
-      dismissCountDown: 0
+      dismissCountDown: 0,
+      authKeyFieldTextError: '',
+      authSecretFieldTextError: '',
+      saveClicked: false
     }
   },
   methods: {
-    storeWexApiKeys () {
+    checkAndSaveAPIKeys () {
+      this.saveClicked = true
+      if (this.checkWexKey && this.checkWexSecret) {
+        this.storeWexApiKeys()
+      }
       this.$store.commit('setWexAPIEnabled', this.wexAPIenabled)
+      this.showAlert()
+    },
+    storeWexApiKeys () {
       this.$store.commit('setWexAPIKey', this.wexApiKey)
       this.$store.commit('setWexAPISecret', this.wexApiSecret)
-      this.showAlert()
     },
     countDownChanged (dismissCountDown) {
       this.dismissCountDown = dismissCountDown
     },
     showAlert () {
       this.dismissCountDown = this.dismissSecs
+    },
+    fieldLengthCheck (textToCheck) {
+      if (!this.isAPIEnabled) return undefined
+      if (this.saveClicked) {
+        if (textToCheck.length < 4) {
+          return false
+        } else return true
+      } else return undefined
     }
   },
   computed: {
     isAPIEnabled () {
-      console.log(this.wexAPIenabled)
       return this.wexAPIenabled
+    },
+    checkWexKey () {
+      let result = this.fieldLengthCheck(this.wexApiKey)
+      if (!result) {
+        this.authKeyFieldTextError = 'Please enter a valid API key.'
+      }
+      return result
+    },
+    checkWexSecret () {
+      let result = this.fieldLengthCheck(this.wexApiSecret)
+      if (!result) {
+        this.authSecretFieldTextError = 'Please enter a valid API secret.'
+      }
+      return result
     }
   }
 }

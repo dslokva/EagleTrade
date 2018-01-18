@@ -13,14 +13,20 @@
         "logout": "Logout",
         "user": "User",
         "account": "Account",
+        "create_account": "Create account",
         "home": "Home",
         "user_settings": "User settings",
         "user_profile": "User profile",
+        "username": "Username",
         "maintable_title": "Coin markets delta monitoring",
         "email": "Email",
         "password": "Password",
+        "password_repeat": "Repeat password",
         "forgot_password": "Forgot password?",
         "enter_api_key": "Please enter your API key",
-        "enter_api_secret": "Please enter your API secret"
+        "enter_api_secret": "Please enter your API secret",
+        "create_account_form": "Create your account",
+        "save_changes_form": "Save changes",
+        "back_form": "Back"
     }
 }
