@@ -27,6 +27,9 @@
         "enter_api_secret": "Please enter your API secret",
         "create_account_form": "Create your account",
         "save_changes_form": "Save changes",
-        "back_form": "Back"
+        "back_form": "Back",
+        "api_key": "API Key",
+        "api_secret": "API Secret",
+        "api_card_header": "Your API settings for cryptomarkets"
     }
 }

@@ -13,7 +13,11 @@ const state = {
     profile: '',
     wexApiKey: '',
     wexApiSecret: '',
-    wexApiEnabled: ''
+    wexApiEnabled: '',
+
+    bitfinexApiKey: '',
+    bitfinexApiSecret: '',
+    bitfinexApiEnabled: ''
   },
 
   currentLocale: 'en',
@@ -63,6 +67,15 @@ const mutations = {
   setWexAPIEnabled (state, newValue) {
     state.userdata.wexApiEnabled = newValue
   },
+  setBitfinexAPIKey (state, newValue) {
+    state.userdata.bitfinexApiKey = newValue
+  },
+  setBitfinexAPISecret (state, newValue) {
+    state.userdata.bitfinexApiSecret = newValue
+  },
+  setBitfinexAPIEnabled (state, newValue) {
+    state.userdata.bitfinexApiEnabled = newValue
+  },
   clearUserProfile (state) {
     state.userdata.profile = ''
     state.authenticated = false
@@ -72,10 +85,15 @@ const mutations = {
 
 const getters = {
   userName: state => JSON.parse(state.userdata.profile).nickname,
+  currentLocale: state => state.currentLocale,
+
   wexAPIEnabled: state => state.userdata.wexApiEnabled,
-  wexApiKey: state => state.userdata.wexApiKey,
-  wexApiSecret: state => state.userdata.wexApiSecret,
-  currentLocale: state => state.currentLocale
+  wexAPIKey: state => state.userdata.wexApiKey,
+  wexAPISecret: state => state.userdata.wexApiSecret,
+
+  bitfinexAPIEnabled: state => state.userdata.bitfinexApiEnabled,
+  bitfinexAPIKey: state => state.userdata.bitfinexApiKey,
+  bitfinexAPISecret: state => state.userdata.bitfinexApiSecret
 }
 
 export default new Vuex.Store({
