@@ -83,7 +83,8 @@ export default {
       APISecret: this.inAPISecret,
       authKeyFieldTextError: '',
       authSecretFieldTextError: '',
-      saveClicked: false
+      saveClicked: false,
+      validationSuccess: false
     }
   },
   mounted () {
@@ -93,7 +94,9 @@ export default {
   methods: {
     checkAndSaveAPIKeys () {
       this.saveClicked = true
+      this.validationSuccess = false
       if (this.checkKey && this.checkSecret) {
+        this.validationSuccess = true
         this.storeAPIKeys()
         this.storeAPIEnabledState()
         this.showAlert()
@@ -101,6 +104,7 @@ export default {
 
       if (!this.isAPIEnabled) {
         this.storeAPIEnabledState()
+        this.validationSuccess = true
         this.showAlert()
       }
     },
@@ -127,14 +131,14 @@ export default {
     checkKey () {
       let result = this.fieldLengthCheck(this.APIKey)
       if (!result) {
-        this.authKeyFieldTextError = 'Please enter a valid API key.'
+        this.authKeyFieldTextError = this.$i18n.t('i18n.enter_valid_api_key')
       }
       return result
     },
     checkSecret () {
       let result = this.fieldLengthCheck(this.APISecret)
       if (!result) {
-        this.authSecretFieldTextError = 'Please enter a valid API secret.'
+        this.authSecretFieldTextError = this.$i18n.t('i18n.enter_valid_api_secret')
       }
       return result
     }

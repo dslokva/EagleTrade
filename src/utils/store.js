@@ -19,8 +19,9 @@ const state = {
     bitfinexApiSecret: '',
     bitfinexApiEnabled: ''
   },
-
+  serverTick: '',
   currentLocale: 'en',
+  coinData: '',
 
   socket: {
     isConnected: false,
@@ -41,8 +42,15 @@ const mutations = {
   },
   // default handler called for all methods
   SOCKET_ONMESSAGE (state, message) {
-    console.log(message)
-    state.message = message
+    // todo: replace this code with bus.$emit('method', obj)
+    let rawMessage = message.data
+    if (rawMessage.startsWith('tick:')) {
+      state.serverTick = rawMessage.substring(5, rawMessage.length)
+    } else
+    if (rawMessage.startsWith('coin_data:')) {
+      state.coinData = rawMessage.substring(10, rawMessage.length)
+    }
+    state.socket.message = rawMessage
   },
   // mutations for reconnect methods
   SOCKET_RECONNECT (state, count) {
@@ -53,7 +61,6 @@ const mutations = {
   },
   setUserProfile (state, newValue) {
     state.userdata.profile = newValue
-    console.log('user changed - ' + JSON.parse(state.userdata.profile).nickname)
   },
   setCurrentLocale (state, newValue) {
     state.currentLocale = newValue
@@ -78,14 +85,14 @@ const mutations = {
   },
   clearUserProfile (state) {
     state.userdata.profile = ''
-    state.authenticated = false
-    console.log('user profile cleared')
+    // todo: clean local storage api keys at logout + load it at login
   }
 }
 
 const getters = {
   userName: state => JSON.parse(state.userdata.profile).nickname,
   currentLocale: state => state.currentLocale,
+  serverTick: state => state.serverTick,
 
   wexAPIEnabled: state => state.userdata.wexApiEnabled,
   wexAPIKey: state => state.userdata.wexApiKey,

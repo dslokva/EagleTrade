@@ -25,11 +25,13 @@
         "forgot_password": "Забыли пароль?",
         "enter_api_key": "Пожалуйста введите ваш API ключ",
         "enter_api_secret": "Пожалуйста введите ваш API секрет",
+        "enter_valid_api_key": "Пожалуйста введите правильный API ключ",
+        "enter_valid_api_secret": "Пожалуйста введите правильный API секрет",
         "create_account_form": "Создайте вашу учетную запись",
         "save_changes_form": "Сохранить изменения",
         "back_form": "Назад",
         "api_key": "API Ключ",
         "api_secret": "API Секрет",
-        "api_card_header": "Ваши настройки доступа к API криптовалютных бирж"
+        "api_card_header": "Настройки доступа к API криптовалютных бирж"
     }
 }

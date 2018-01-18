@@ -65,6 +65,10 @@ export default {
     fixed: {
       type: Boolean,
       default: false
+    },
+    items: {
+      type: String,
+      default: ''
     }
   },
   data: () => {
@@ -102,40 +106,6 @@ export default {
           key: 'cexio_price',
           label: 'CEX.io',
           sortable: true
-        }
-      ],
-      items: [
-        {
-          pair: 'Bitcoin',
-          delta: '5%',
-          wex_price: '12400',
-          bitfinex_price: '12500',
-          kraken_price: '12345',
-          cexio_price: '14890'
-        },
-        {
-          pair: 'Etherium',
-          delta: '1%',
-          wex_price: '1200',
-          bitfinex_price: '1250',
-          kraken_price: '1234',
-          cexio_price: '1489'
-        },
-        {
-          pair: 'ZCash',
-          delta: '3%',
-          wex_price: '760',
-          bitfinex_price: '754',
-          kraken_price: '767',
-          cexio_price: '789'
-        },
-        {
-          pair: 'Litecoin',
-          delta: '18%',
-          wex_price: '250',
-          bitfinex_price: '245',
-          kraken_price: '256',
-          cexio_price: '271'
         }
       ],
       currentPage: 1,

@@ -25,11 +25,13 @@
         "forgot_password": "Forgot password?",
         "enter_api_key": "Please enter your API key",
         "enter_api_secret": "Please enter your API secret",
+        "enter_valid_api_key": "Please enter a valid API key",
+        "enter_valid_api_secret": "Please enter a valid API secret",
         "create_account_form": "Create your account",
         "save_changes_form": "Save changes",
         "back_form": "Back",
         "api_key": "API Key",
         "api_secret": "API Secret",
-        "api_card_header": "Your API settings for cryptomarkets"
+        "api_card_header": "Cryptomarkets API settings"
     }
 }
