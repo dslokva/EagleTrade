@@ -51,6 +51,7 @@ const mutations = {
       state.coinData = rawMessage.substring(10, rawMessage.length)
     }
     state.socket.message = rawMessage
+    console.log(JSON.stringify(state.coinData))
   },
   // mutations for reconnect methods
   SOCKET_RECONNECT (state, count) {

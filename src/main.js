@@ -8,7 +8,7 @@ import i18n from './i18n'
 import mainStore from './utils/store'
 import VueNativeSock from 'vue-native-websocket'
 
-Vue.use(VueNativeSock, 'ws://127.0.0.1:40510/', {
+Vue.use(VueNativeSock, 'ws://127.0.0.1:40510/ws', {
   reconnection: true,
   reconnectionAttempts: 5,
   reconnectionDelay: 3000,

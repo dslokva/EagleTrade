@@ -67,7 +67,7 @@ export default {
       default: false
     },
     items: {
-      type: String,
+      type: Array,
       default: ''
     }
   },
