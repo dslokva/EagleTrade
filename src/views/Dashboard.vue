@@ -35,36 +35,12 @@ export default {
     return {
       items: [
         {
-          pair: 'Bitcoin',
-          delta: '5%',
-          wex_price: '12400',
-          bitfinex_price: '12982',
-          kraken_price: '12345',
-          cexio_price: '14890'
-        },
-        {
-          pair: 'Etherium',
-          delta: '1%',
-          wex_price: '1200',
-          bitfinex_price: '1250',
-          kraken_price: '1234',
-          cexio_price: '1489'
-        },
-        {
-          pair: 'ZCash',
-          delta: '3%',
-          wex_price: '760',
-          bitfinex_price: '754',
-          kraken_price: '767',
-          cexio_price: '789'
-        },
-        {
-          pair: 'Litecoin',
-          delta: '18%',
-          wex_price: '250',
-          bitfinex_price: '245',
-          kraken_price: '256',
-          cexio_price: '271'
+          // pair: '---',
+          // delta: '0%',
+          // wex_price: '0',
+          // bitfinex_price: '0',
+          // kraken_price: '0',
+          // cexio_price: '0'
         }
       ]
     }
@@ -86,7 +62,30 @@ export default {
     getTick () {
       return this.$store.getters.serverTick
     },
+    getCoinData () {
+      return this.$store.getters.publicCoinData
+    },
     getItems () {
+      let storeObjects = JSON.parse(JSON.stringify(this.getCoinData))
+      if (storeObjects.wex_public) {
+        let wexCoinData = storeObjects.wex_public
+        this.items.length = 0
+
+        for (let i = 0; i < wexCoinData.length; i++) {
+          let wexCoin = JSON.parse(wexCoinData[i])
+          console.log(wexCoin)
+          let item = {}
+
+          item.pair = wexCoin.coin_pair
+          item.delta = '0%'
+          item.wex_price = wexCoin.ticker.last
+          item.bitfinex_price = '0'
+          item.kraken_price = '0'
+          item.cexio_price = '0'
+
+          this.items.push(item)
+        }
+      }
       return this.items
     }
   }

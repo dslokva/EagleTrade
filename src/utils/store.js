@@ -21,11 +21,10 @@ const state = {
   },
   serverTick: '',
   currentLocale: 'en',
-  coinData: '',
+  publicCoinData: '',
 
   socket: {
     isConnected: false,
-    message: '',
     reconnectError: false
   }
 }
@@ -42,18 +41,11 @@ const mutations = {
   },
   // default handler called for all methods
   SOCKET_ONMESSAGE (state, message) {
-    // todo: replace this code with bus.$emit('method', obj)
-    let rawMessage = message.data
-    if (rawMessage.startsWith('tick:')) {
-      state.serverTick = rawMessage.substring(5, rawMessage.length)
-    } else
-    if (rawMessage.startsWith('coin_data:')) {
-      state.coinData = rawMessage.substring(10, rawMessage.length)
+    let rawMessage = JSON.parse(message.data)
+    if (rawMessage.public_coin_data) {
+      state.publicCoinData = rawMessage.public_coin_data
     }
-    state.socket.message = rawMessage
-    console.log(JSON.stringify(state.coinData))
   },
-  // mutations for reconnect methods
   SOCKET_RECONNECT (state, count) {
     console.info(state, count)
   },
@@ -101,7 +93,9 @@ const getters = {
 
   bitfinexAPIEnabled: state => state.userdata.bitfinexApiEnabled,
   bitfinexAPIKey: state => state.userdata.bitfinexApiKey,
-  bitfinexAPISecret: state => state.userdata.bitfinexApiSecret
+  bitfinexAPISecret: state => state.userdata.bitfinexApiSecret,
+
+  publicCoinData: state => state.publicCoinData
 }
 
 export default new Vuex.Store({

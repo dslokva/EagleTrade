@@ -25,10 +25,6 @@
 </template>
 
 <script>
-/**
-   * Randomize array element order in-place.
-   * Using Durstenfeld shuffle algorithm.
-   */
 const shuffleArray = array => {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1))
@@ -79,7 +75,7 @@ export default {
       fields: [
         {
           key: 'pair',
-          label: 'Pair name',
+          label: 'Coin / USD',
           sortable: false
         },
         {
