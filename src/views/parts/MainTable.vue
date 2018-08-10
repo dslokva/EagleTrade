@@ -1,5 +1,13 @@
 <template>
-  <b-card :header="tableCaption">
+  <b-card>
+    <div slot="header">
+      <i class="fa fa-id-card-o"></i> {{ $t('i18n.maintable_title') }}
+        <label class="switch switch-sm switch-text switch-info float-right mb-0">
+          <input type="checkbox" class="switch-input" v-model="autoRefreshEnabled">
+          <span class="switch-label" data-on="on" data-off="off"></span>
+          <span class="switch-handle"></span>
+        </label>
+      </div>
     <b-table 
     :hover="hover" 
     :striped="striped" 
@@ -9,6 +17,7 @@
     class="table-responsive-sm" 
     :items="items" 
     :fields="fields" 
+    :disabled="!isAutoRefreshEnabled"
     :current-page="currentPage" 
     :per-page="perPage"
     :sort-by.sync="sortBy"
@@ -70,44 +79,46 @@ export default {
   data: () => {
     return {
       isBusy: false,
-      sortBy: 'delta',
+      sortBy: 'Time',
       sortDesc: true,
       fields: [
         {
-          key: 'pair',
-          label: 'Coin / USD',
-          sortable: false
-        },
-        {
-          key: 'delta',
-          label: 'Delta %',
+          key: 'de',
+          label: 'DE',
           sortable: true
         },
         {
-          key: 'wex_price',
-          label: 'WEX',
+          key: 'frequency',
+          label: 'Frequency',
           sortable: true
         },
         {
-          key: 'bitfinex_price',
-          label: 'Bitfinex',
+          key: 'dx',
+          label: 'DX',
           sortable: true
         },
         {
-          key: 'kraken_price',
-          label: 'Kraken',
+          key: 'comment',
+          label: 'Comment',
           sortable: true
         },
         {
-          key: 'cexio_price',
-          label: 'CEX.io',
+          key: 'time',
+          label: 'Time UTC 0',
           sortable: true
         }
       ],
       currentPage: 1,
-      perPage: 7,
+      perPage: 15,
       totalRows: 0,
-      showPageNavigator: shuffleArray.length > this.perPage
+      showPageNavigator: shuffleArray.length > this.perPage,
+      autoRefreshEnabled: this.$store.getters.autoRefreshEnabled
+    }
+  },
+  watch: {
+    autoRefreshEnabled (val) {
+      this.$store.commit('setAutoRefreshEnabled', val)
+      console.log(this.$store.getters.autoRefreshEnabled)
     }
   },
   methods: {
@@ -125,8 +136,8 @@ export default {
     }
   },
   computed: {
-    tableCaption () {
-      return "<i class='fa fa-line-chart fa-lg'></i> " + this.$i18n.t('i18n.maintable_title')
+    isAutoRefreshEnabled () {
+      return !this.autoRefreshEnabled
     }
   }
 }

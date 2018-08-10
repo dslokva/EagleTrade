@@ -1,15 +1,17 @@
 <template>
   <div class="animated fadeIn">
     <b-row>
-      <b-col lg="12">
+      <b-col lg="10">
         <mainTable :items="getItems" hover></mainTable>
       </b-col>
     </b-row>
    
-    <b-button variant="primary" @click="getPublicCoinsData()"><i class="fa fa-refresh"></i>&nbsp; Refresh data</b-button>
+    <b-button variant="primary" @click="getLast50Spots()"><i class="fa fa-refresh"></i>&nbsp; Show last 50 spots</b-button>
+    
+    <b-row align-h="start"><b-col>&nbsp;</b-col></b-row>
 
     <section v-if="authRequired()">
-      <b-row align-h="end">
+      <b-row align-h="start">
         <b-col md="4">
           <b-card size="sm" border-variant="secondary"
                 header="Server time"
@@ -35,12 +37,7 @@ export default {
     return {
       items: [
         {
-          // pair: '---',
-          // delta: '0%',
-          // wex_price: '0',
-          // bitfinex_price: '0',
-          // kraken_price: '0',
-          // cexio_price: '0'
+
         }
       ]
     }
@@ -49,12 +46,12 @@ export default {
     mainTable
   },
   methods: {
-    authRequired: function () {
+    authRequired () {
       return isLoggedIn()
     },
-    getPublicCoinsData () {
+    getLast50Spots () {
       this.$socket.send(
-        JSON.stringify({ request: 'getPublicCoinsData' })
+        JSON.stringify({ request: 'getLast50Spots' })
       )
     }
   },
@@ -62,28 +59,27 @@ export default {
     getTick () {
       return this.$store.getters.serverTick
     },
-    getCoinData () {
-      return this.$store.getters.publicCoinData
+    getLast50SpotData () {
+      return this.$store.getters.last50spots
     },
     getItems () {
-      let storeObjects = JSON.parse(JSON.stringify(this.getCoinData))
-      if (storeObjects.wex_public) {
-        let wexCoinData = storeObjects.wex_public
-        this.items.length = 0
+      if (this.getLast50SpotData) {
+        let spotData = JSON.parse(JSON.stringify(this.getLast50SpotData))
+        if (spotData) {
+          this.items.length = 0
 
-        for (let i = 0; i < wexCoinData.length; i++) {
-          let wexCoin = JSON.parse(wexCoinData[i])
-          console.log(wexCoin)
-          let item = {}
+          for (let i = 0; i < spotData.length; i++) {
+            let spot = JSON.parse(JSON.stringify(spotData[i]))
+            let item = {}
 
-          item.pair = wexCoin.coin_pair
-          item.delta = '0%'
-          item.wex_price = wexCoin.ticker.last
-          item.bitfinex_price = '0'
-          item.kraken_price = '0'
-          item.cexio_price = '0'
+            item.de = spot.spot.de
+            item.frequency = spot.spot.freq
+            item.dx = spot.spot.dx
+            item.comment = spot.spot.comment
+            item.time = spot.spot.time
 
-          this.items.push(item)
+            this.items.push(item)
+          }
         }
       }
       return this.items

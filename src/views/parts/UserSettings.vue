@@ -14,29 +14,17 @@
             <i class="fa fa-id-card-o"></i> {{ $t('i18n.api_card_header') }}
           </div>
       <b-row>
-        <MarketAPICard 
+        <!-- <MarketAPICard 
           :name="'WexMarketAPICard'"
           :title="'WEX.nz'" 
           :showAlert="showAlert" 
           :inBus="bus" 
-          :inAPIenabled="wexAPIenabled" 
-          :inAPIKey="wexAPIKey" 
-          :inAPISecret="wexAPISecret"
+          :inAPIenabled="true" 
+          :inAPIKey="'2222'" 
+          :inAPISecret="'ddddd'"
           :APIEnabledMethod="'setWexAPIEnabled'"
           :APIKeySaveMethod="'setWexAPIKey'"
-          :APISecretSaveMethod="'setWexAPISecret'"/>
-
-        <MarketAPICard 
-          :name="'BitfinexMarketAPICard'" 
-          :title="'Bitfinex.com'"  
-          :showAlert="showAlert" 
-          :inBus="bus" 
-          :inAPIenabled="bitfinexAPIenabled" 
-          :inAPIKey="bitfinexAPIKey" 
-          :inAPISecret="bitfinexAPISecret"
-          :APIEnabledMethod="'setBitfinexAPIEnabled'"
-          :APIKeySaveMethod="'setBitfinexAPIKey'"
-          :APISecretSaveMethod="'setBitfinexAPISecret'"/>
+          :APISecretSaveMethod="'setWexAPISecret'"/> -->
       </b-row>
          
       <div slot="footer">
@@ -48,7 +36,7 @@
 </template>
 
 <script>
-import MarketAPICard from './microparts/MarketAPICard'
+// import MarketAPICard from './microparts/MarketAPICard'
 import Vue from 'vue'
 
 export default {
@@ -57,15 +45,15 @@ export default {
     return {
       dismissSecs: 3,
       dismissCountDown: 0,
-      bus: new Vue(),
+      bus: new Vue()
 
-      wexAPIenabled: this.$store.getters.wexAPIEnabled,
-      wexAPIKey: this.$store.getters.wexAPIKey,
-      wexAPISecret: this.$store.getters.wexAPISecret,
+      // wexAPIenabled: this.$store.getters.wexAPIEnabled,
+      // wexAPIKey: this.$store.getters.wexAPIKey,
+      // wexAPISecret: this.$store.getters.wexAPISecret,
 
-      bitfinexAPIenabled: this.$store.getters.bitfinexAPIEnabled,
-      bitfinexAPIKey: this.$store.getters.bitfinexAPIKey,
-      bitfinexAPISecret: this.$store.getters.bitfinexAPISecret
+      // bitfinexAPIenabled: this.$store.getters.bitfinexAPIEnabled,
+      // bitfinexAPIKey: this.$store.getters.bitfinexAPIKey,
+      // bitfinexAPISecret: this.$store.getters.bitfinexAPISecret
     }
   },
   methods: {
@@ -83,7 +71,7 @@ export default {
 
   },
   components: {
-    MarketAPICard
+    // MarketAPICard
   }
 }
 </script>

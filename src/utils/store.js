@@ -11,17 +11,12 @@ const vuexLocal = new VuexPersistence({
 const state = {
   userdata: {
     profile: '',
-    wexApiKey: '',
-    wexApiSecret: '',
-    wexApiEnabled: '',
-
-    bitfinexApiKey: '',
-    bitfinexApiSecret: '',
-    bitfinexApiEnabled: ''
+    settings: ''
   },
   serverTick: '',
   currentLocale: 'en',
-  publicCoinData: '',
+  last50spots: '',
+  autoRefreshEnabled: false,
 
   socket: {
     isConnected: false,
@@ -42,8 +37,11 @@ const mutations = {
   // default handler called for all methods
   SOCKET_ONMESSAGE (state, message) {
     let rawMessage = JSON.parse(message.data)
-    if (rawMessage.public_coin_data) {
-      state.publicCoinData = rawMessage.public_coin_data
+    if (rawMessage.last_50_spots) {
+      state.last50spots = rawMessage.last_50_spots
+    }
+    if (rawMessage.tick) {
+      state.serverTick = rawMessage.tick.dateStr
     }
   },
   SOCKET_RECONNECT (state, count) {
@@ -58,23 +56,8 @@ const mutations = {
   setCurrentLocale (state, newValue) {
     state.currentLocale = newValue
   },
-  setWexAPIKey (state, newValue) {
-    state.userdata.wexApiKey = newValue
-  },
-  setWexAPISecret (state, newValue) {
-    state.userdata.wexApiSecret = newValue
-  },
-  setWexAPIEnabled (state, newValue) {
-    state.userdata.wexApiEnabled = newValue
-  },
-  setBitfinexAPIKey (state, newValue) {
-    state.userdata.bitfinexApiKey = newValue
-  },
-  setBitfinexAPISecret (state, newValue) {
-    state.userdata.bitfinexApiSecret = newValue
-  },
-  setBitfinexAPIEnabled (state, newValue) {
-    state.userdata.bitfinexApiEnabled = newValue
+  setAutoRefreshEnabled (state, newValue) {
+    state.autoRefreshEnabled = newValue
   },
   clearUserProfile (state) {
     state.userdata.profile = ''
@@ -86,16 +69,8 @@ const getters = {
   userName: state => JSON.parse(state.userdata.profile).nickname,
   currentLocale: state => state.currentLocale,
   serverTick: state => state.serverTick,
-
-  wexAPIEnabled: state => state.userdata.wexApiEnabled,
-  wexAPIKey: state => state.userdata.wexApiKey,
-  wexAPISecret: state => state.userdata.wexApiSecret,
-
-  bitfinexAPIEnabled: state => state.userdata.bitfinexApiEnabled,
-  bitfinexAPIKey: state => state.userdata.bitfinexApiKey,
-  bitfinexAPISecret: state => state.userdata.bitfinexApiSecret,
-
-  publicCoinData: state => state.publicCoinData
+  last50spots: state => state.last50spots,
+  autoRefreshEnabled: state => state.autoRefreshEnabled
 }
 
 export default new Vuex.Store({
