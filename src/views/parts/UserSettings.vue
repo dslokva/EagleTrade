@@ -47,13 +47,6 @@ export default {
       dismissCountDown: 0,
       bus: new Vue()
 
-      // wexAPIenabled: this.$store.getters.wexAPIEnabled,
-      // wexAPIKey: this.$store.getters.wexAPIKey,
-      // wexAPISecret: this.$store.getters.wexAPISecret,
-
-      // bitfinexAPIenabled: this.$store.getters.bitfinexAPIEnabled,
-      // bitfinexAPIKey: this.$store.getters.bitfinexAPIKey,
-      // bitfinexAPISecret: this.$store.getters.bitfinexAPISecret
     }
   },
   methods: {

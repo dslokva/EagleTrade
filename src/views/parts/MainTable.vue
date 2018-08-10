@@ -3,7 +3,7 @@
     <div slot="header">
       <i class="fa fa-id-card-o"></i> {{ $t('i18n.maintable_title') }}
         <label class="switch switch-sm switch-text switch-info float-right mb-0">
-          <input type="checkbox" class="switch-input" v-model="autoRefreshEnabled">
+          <input type="checkbox" class="switch-input" v-model="autoRefreshEnabled" value="false" unchecked-value="true">
           <span class="switch-label" data-on="on" data-off="off"></span>
           <span class="switch-handle"></span>
         </label>
@@ -34,16 +34,6 @@
 </template>
 
 <script>
-const shuffleArray = array => {
-  for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1))
-    let temp = array[i]
-    array[i] = array[j]
-    array[j] = temp
-  }
-  return array
-}
-
 export default {
   name: 'table',
   props: {
@@ -76,7 +66,7 @@ export default {
       default: ''
     }
   },
-  data: () => {
+  data () {
     return {
       isBusy: false,
       sortBy: 'Time',
@@ -111,14 +101,13 @@ export default {
       currentPage: 1,
       perPage: 15,
       totalRows: 0,
-      showPageNavigator: shuffleArray.length > this.perPage,
+      showPageNavigator: this.items.length > this.perPage,
       autoRefreshEnabled: this.$store.getters.autoRefreshEnabled
     }
   },
   watch: {
     autoRefreshEnabled (val) {
       this.$store.commit('setAutoRefreshEnabled', val)
-      console.log(this.$store.getters.autoRefreshEnabled)
     }
   },
   methods: {
@@ -137,7 +126,7 @@ export default {
   },
   computed: {
     isAutoRefreshEnabled () {
-      return !this.autoRefreshEnabled
+      return this.autoRefreshEnabled
     }
   }
 }
